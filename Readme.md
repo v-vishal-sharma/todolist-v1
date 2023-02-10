@@ -5,6 +5,7 @@ After installing `npm`, initialise `npm` using `npm init` command in your termin
 Install the following packages after initialising `npm`:
   1.Express
   2.body-parser
+  3.ejs
   
 Type `nodemon app.js` to start the server.
 

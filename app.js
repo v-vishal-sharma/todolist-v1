@@ -1,5 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const date = require(__dirname + "/date.js");
 
 const app = express();
 // declare this line below the above line ALWAYS!! To avoid errors.
@@ -8,21 +9,13 @@ app.use(bodyParser.urlencoded({extended:true}));
 // All the static files are loaded via this.
 app.use(express.static("public"));
 
-let items = [];
-let workItems = [];
+//creating arrays will const will not give error until you are not assigning it values. Pushing values inside array is acceptable but assigning values is not.
+const items = [];
+const workItems = [];
 
 app.get("/", function(req,res){
 
-    let today = new Date();
-    let year = today.getFullYear();
-
-    let options = {
-        weekday: "long",
-        day : "numeric",
-        month: "long"
-    };
-
-    let day = today.toLocaleDateString("en-US", options); 
+    const day = date.getDate();
 
     // the object property name must match with the variable name inside ejs file and property value should have the variable name of value to be displayed there.
     res.render("list", {listTitle: day, newListItem: items});
@@ -30,9 +23,8 @@ app.get("/", function(req,res){
 })
 
 app.post("/", function(req,res){
-    let item = req.body.newItem;
+    const item = req.body.newItem;
 
-    console.log(req.body);
 
     //list is the value given to name attribute of button and work is the value given to the value attribute
     if (req.body.list === "Work"){
